@@ -14,7 +14,7 @@ At Pawsey Supercomputing Centre, at present, users on the [Nimbus cloud service]
 
 ## Setting up CernVM-FS access on Nimbus instances
 
-Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires only running three lines of code as follows:
+Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires only running three lines of code:
 
     git clone https://github.com/qcif/cvmfs-setup-galaxy.git
     cd cvmfs-setup-galaxy/
@@ -24,7 +24,7 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
     
 ## Acknowledgements
 
-This work is jointly supported by Pawsey Supercomputing Centre and the Australian BioCommons which is enabled by NCRIS via Bioplatforms Australia funding. Special thanks to QCIF for probiding the simple setup code.
+This work is jointly supported by Pawsey Supercomputing Centre and the Australian BioCommons which is enabled by NCRIS via Bioplatforms Australia funding. Special thanks to QCIF for providing the simple setup code.
 
 ## See also
 
