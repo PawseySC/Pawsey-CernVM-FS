@@ -18,9 +18,8 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
 
     git clone https://github.com/qcif/cvmfs-setup-galaxy.git
     cd cvmfs-setup-galaxy/
-    sudo ./cvmfs-galaxy-client-setup.sh 146.118.66.104
+    sudo ./cvmfs-galaxy-client-setup.sh cvmfs-cachingproxy.pawsey.org.au
 
-    #Note that 146.118.66.104 is the IP address of the Nimbus caching-proxy instance
     
 ## Acknowledgements
 
