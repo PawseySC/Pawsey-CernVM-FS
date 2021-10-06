@@ -2,7 +2,7 @@
 
 ## What is the aim of this document?
 
-This document is designed to provide current users at Pawsey easy access to a reference dataset repository, through CernVM-FS.
+This document is designed to provide current users at [Pawsey Supercomputing Centre](https://pawsey.org.au) easy access to a reference dataset repository, through CernVM-FS.
 
 ## What is CernVM-FS and why is it useful?
 
