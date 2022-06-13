@@ -25,8 +25,14 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
 Users will simply access the data sets as though part of their file system, e.g. accessing the Galaxy project's data repository web server (Stratum 1) is as simple as this:
 
     ls /cvmfs/data.galaxyproject.org
+    
+Other Galaxy repositories can be accessed via the following:
 
-Once the above path is cached, the user can explore all repositories under /cvmfs. When running analyses, the reference file need only be pointed to the appropriate directory path.
+    ls /cvmfs/singularity.galaxyproject.org
+    ls  /cvmfs/main.galaxyproject.org
+    ls  /cvmfs/cvmfs-config.galaxyproject.org
+
+Once the above path(s) is(are) cached, the user can explore all repositories under /cvmfs. When running analyses, the reference file need only be pointed to the appropriate directory path.
     
 ## Acknowledgements
 
