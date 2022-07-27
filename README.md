@@ -16,9 +16,16 @@ At Pawsey Supercomputing Centre, at present, users on the [Nimbus cloud service]
 
 Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires only running three lines of code:
 
-    git clone https://github.com/qcif/cvmfs-setup-galaxy.git
-    cd cvmfs-setup-galaxy/
-    sudo ./cvmfs-galaxy-client-setup.sh cvmfs-cachingproxy.pawsey.org.au
+    git clone https://github.com/PawseySC/Pawsey-CernVM-FS.git
+    cd Pawsey-CernVM-FS
+    sudo ./cvmfs-proxy-setup.sh \
+    --stratum-1 bcws.test.aarnet.edu.au \
+    --stratum-1 cvmfs1-mel0.gvl.org.au \
+    --stratum-1 cvmfs1-ufr0.galaxyproject.eu \
+    --stratum-1 cvmfs1-tacc0.galaxyproject.org \
+    --stratum-1 cvmfs1-iu0.galaxyproject.org \
+    --stratum-1 cvmfs1-psu0.galaxyproject.org \
+    146.118.64.0/21
 
 ## Using CernVM-FS
 
@@ -26,8 +33,11 @@ Users will simply access the data sets as though part of their file system, e.g.
 
     ls /cvmfs/data.galaxyproject.org
     
-Other Galaxy repositories can be accessed via the following:
+Other repositories can be accessed via the following:
 
+    ls /cvmfs/containers.biocommons.aarnet.edu.au
+    ls /cvmfs/data.biocommons.aarnet.edu.au
+    ls /cvmfs/tools.bioommons.aarnet.edu.au
     ls /cvmfs/singularity.galaxyproject.org
     ls  /cvmfs/main.galaxyproject.org
     ls  /cvmfs/cvmfs-config.galaxyproject.org
@@ -40,5 +50,5 @@ This work is jointly supported by Pawsey Supercomputing Centre and the Australia
 
 ## See also
 
-- [CernVM-FS setup for Galaxy Project CVMFS repositories](https://github.com/qcif/cvmfs-setup-galaxy)
+- [CernVM-FS setup default](https://github.com/qcif/cvmfs-setup-example)
 - [CernVM-FS documentation](https://cvmfs.readthedocs.io/en/stable/)
