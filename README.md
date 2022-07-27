@@ -18,14 +18,20 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
 
     git clone https://github.com/PawseySC/Pawsey-CernVM-FS.git
     cd Pawsey-CernVM-FS
-    sudo ./cvmfs-proxy-setup.sh \
-    --stratum-1 bcws.test.aarnet.edu.au \
-    --stratum-1 cvmfs1-mel0.gvl.org.au \
-    --stratum-1 cvmfs1-ufr0.galaxyproject.eu \
-    --stratum-1 cvmfs1-tacc0.galaxyproject.org \
-    --stratum-1 cvmfs1-iu0.galaxyproject.org \
-    --stratum-1 cvmfs1-psu0.galaxyproject.org \
-    146.118.64.0/21
+    sudo ./cvmfs-client-setup.sh \
+        --stratum-1 cvmfs1-mel0.gvl.org.au \
+        --stratum-1 cvmfs1-ufr0.galaxyproject.eu \
+        --stratum-1 cvmfs1-tacc0.galaxyproject.org \
+        --stratum-1 cvmfs1-iu0.galaxyproject.org \
+        --stratum-1 cvmfs1-psu0.galaxyproject.org \
+        --proxy cvmfs-cachingproxy.pawsey.org.au \
+        cvmfs-config.galaxyproject.org.pub \
+        data.galaxyproject.org.pub \
+        main.galaxyproject.org.pub \
+        sandbox.galaxyproject.org.pub \
+        singularity.galaxyproject.org.pub \
+        test.galaxyproject.org.pub \
+        usegalaxy.galaxyproject.org.pub
 
 ## Using CernVM-FS
 
