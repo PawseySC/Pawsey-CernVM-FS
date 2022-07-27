@@ -18,6 +18,8 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
 
     git clone https://github.com/PawseySC/Pawsey-CernVM-FS.git
     cd Pawsey-CernVM-FS
+
+    # for Galaxy repos
     sudo ./cvmfs-client-setup.sh \
         --stratum-1 cvmfs1-mel0.gvl.org.au \
         --stratum-1 cvmfs1-ufr0.galaxyproject.eu \
@@ -25,13 +27,19 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
         --stratum-1 cvmfs1-iu0.galaxyproject.org \
         --stratum-1 cvmfs1-psu0.galaxyproject.org \
         --proxy cvmfs-cachingproxy.pawsey.org.au \
-        cvmfs-config.galaxyproject.org.pub \
-        data.galaxyproject.org.pub \
-        main.galaxyproject.org.pub \
-        sandbox.galaxyproject.org.pub \
-        singularity.galaxyproject.org.pub \
-        test.galaxyproject.org.pub \
-        usegalaxy.galaxyproject.org.pub
+        pubkeys/cvmfs-config.galaxyproject.org.pub \
+        pubkeys/data.galaxyproject.org.pub \
+        pubkeys/main.galaxyproject.org.pub \
+        pubkeys/sandbox.galaxyproject.org.pub \
+        pubkeys/singularity.galaxyproject.org.pub \
+        pubkeys/test.galaxyproject.org.pub \
+        pubkeys/usegalaxy.galaxyproject.org.pub
+
+    # for AARNet repos
+    sudo ./cvmfs-client-setup.sh \
+        --stratum-1 bcws.test.aarnet.edu.au \
+        --proxy cvmfs-cachingproxy.pawsey.org.au \
+        pubkeys/containers.biocommons.aarnet.edu.au.pub pubkeys/data.biocommons.aarnet.edu.au.pub pubkeys/tools.biocommons.aarnet.edu.au.pub
 
 ## Using CernVM-FS
 
