@@ -18,28 +18,8 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
 
     git clone https://github.com/PawseySC/Pawsey-CernVM-FS.git
     cd Pawsey-CernVM-FS
-
-    # for Galaxy repos
-    sudo ./cvmfs-client-setup.sh \
-        --stratum-1 cvmfs1-mel0.gvl.org.au \
-        --stratum-1 cvmfs1-ufr0.galaxyproject.eu \
-        --stratum-1 cvmfs1-tacc0.galaxyproject.org \
-        --stratum-1 cvmfs1-iu0.galaxyproject.org \
-        --stratum-1 cvmfs1-psu0.galaxyproject.org \
-        --proxy cvmfs-cachingproxy.pawsey.org.au \
-        pubkeys/cvmfs-config.galaxyproject.org.pub \
-        pubkeys/data.galaxyproject.org.pub \
-        pubkeys/main.galaxyproject.org.pub \
-        pubkeys/sandbox.galaxyproject.org.pub \
-        pubkeys/singularity.galaxyproject.org.pub \
-        pubkeys/test.galaxyproject.org.pub \
-        pubkeys/usegalaxy.galaxyproject.org.pub
-
-    # for AARNet repos
-    sudo ./cvmfs-client-setup.sh \
-        --stratum-1 bcws.test.aarnet.edu.au \
-        --proxy cvmfs-cachingproxy.pawsey.org.au \
-        pubkeys/containers.biocommons.aarnet.edu.au.pub pubkeys/data.biocommons.aarnet.edu.au.pub pubkeys/tools.biocommons.aarnet.edu.au.pub
+    sudo chmod u+x install-cvmfs.sh 
+    sudo ./install-cvmfs.sh install
 
 ## Using CernVM-FS
 
@@ -57,7 +37,11 @@ Other repositories can be accessed via the following:
     ls  /cvmfs/cvmfs-config.galaxyproject.org
 
 Once the above path(s) is(are) cached, the user can explore all repositories under /cvmfs. When running analyses, the reference file need only be pointed to the appropriate directory path.
-    
+
+You can also mount all repositories by running:
+
+    sudo ./install-cvmfs.sh mount
+
 ## Acknowledgements
 
 This work is jointly supported by Pawsey Supercomputing Centre and the Australian BioCommons. Special thanks to QCIF for providing the simple setup code.
