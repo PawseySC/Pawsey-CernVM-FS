@@ -10,7 +10,7 @@ This document is designed to provide current users at [Pawsey Supercomputing Cen
 
 CernVM-FS is a useful solution for ensuring access to commonly used datasets is centralised and easy, and the datasets always updated on the main repository server (Stratum 0), mirrored by replica web servers (Stratum 1), fetched by the proxies (Stratum 2), and accessible to the clients (Stratum 3).
 
-At Pawsey Supercomputing Centre, at present, users on the [Nimbus cloud service](https://pawsey.org.au/systems/nimbus-cloud-service/) can access the Galaxy Project's CernVM-FS data repository webserver /cvmfs/data.galaxyproject.org.
+At Pawsey Supercomputing Centre, at present, users on the [Nimbus cloud service](https://pawsey.org.au/systems/nimbus-cloud-service/) can access the Galaxy Project's and AARNet's Biocommons CernVM-FS data repositories.
 
 ## Installation
 
@@ -23,7 +23,7 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
 
 ## Using CernVM-FS
 
-Users will simply access the data sets as though part of their file system, e.g. accessing the Galaxy project's data repository web server (Stratum 1) is as simple as this:
+Users will simply access the data sets as though part of their file system, e.g. accessing the Galaxy project's data repository is as simple as this:
 
     ls /cvmfs/data.galaxyproject.org
     
