@@ -44,7 +44,7 @@ You can also mount all repositories by running:
 
 ## Acknowledgements
 
-This work is jointly supported by Pawsey Supercomputing Centre and the Australian BioCommons. Special thanks to QCIF for providing the simple setup code.
+This work is jointly supported by Pawsey Supercomputing Centre and the Australian BioCommons. Special thanks to QCIF for providing the setup scripts.
 
 ## See also
 
