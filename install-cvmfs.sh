@@ -47,8 +47,7 @@ install_all() {
        --stratum-1 cvmfs1-ufr0.galaxyproject.eu \
        --stratum-1 cvmfs1-tacc0.galaxyproject.org \
        --stratum-1 cvmfs1-iu0.galaxyproject.org \
-       --stratum-1 cvmfs1-psu0.galaxyproject.org \
-       --proxy cvmfs-cachingproxy.pawsey.org.au \
+       --stratum-1 cvmfs1-psu0.galaxyproject.org  \
        pubkeys/cvmfs-config.galaxyproject.org.pub \
        pubkeys/data.galaxyproject.org.pub \
        pubkeys/main.galaxyproject.org.pub \
