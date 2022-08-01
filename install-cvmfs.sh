@@ -25,10 +25,6 @@ uninstall_all() {
 }
 
 install_all() {
-  apt-get -y autoremove cvmfs
-  apt-get -y purge cvmfs
-  rm -rf /etc/cvmfs
-
   ./cvmfs-client-setup.sh \
        --stratum-1 stratum1-cvmfs.pawsey.org.au \
        --proxy $PROXY \

@@ -21,6 +21,11 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
     sudo chmod u+x install-cvmfs.sh 
     sudo ./install-cvmfs.sh install
 
+If you currently have CVMFS installed for use at Pawsey, you may need to run uninstall before installing again to refresh the repositories:
+
+    sudo ./install-cvmfs.sh uninstall
+    sudo ./install-cvmfs.sh install
+
 ## Using CernVM-FS
 
 Users will simply access the data sets as though part of their file system, e.g. accessing the Galaxy project's data repository is as simple as this:
