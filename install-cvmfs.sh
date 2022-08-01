@@ -6,7 +6,7 @@
 EXE=$(basename "$0" .sh)
 EXE_EXT=$(basename "$0")
 
-PROXY=cvmfs-cachingproxy.pawsey.org.au
+PROXY=cvmfs-proxy.pawsey.org.au
 PROXY2=cvmfs-proxy-2.pawsey.org.au
 PROXY3=cvmfs-proxy-3.pawsey.org.au
 
