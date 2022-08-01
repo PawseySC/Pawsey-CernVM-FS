@@ -7,6 +7,8 @@ EXE=$(basename "$0" .sh)
 EXE_EXT=$(basename "$0")
 
 PROXY=cvmfs-cachingproxy.pawsey.org.au
+PROXY2=cvmfs-proxy-2.pawsey.org.au
+PROXY3=cvmfs-proxy-3.pawsey.org.au
 
 #----------------------------------------------------------------
 # Functions
@@ -27,19 +29,20 @@ uninstall_all() {
 install_all() {
   ./cvmfs-client-setup.sh \
        --stratum-1 stratum1-cvmfs.pawsey.org.au \
-       --proxy $PROXY \
+       --proxy $PROXY3 \
        pubkeys/containers.cvmfs.pawsey.org.au.pub
        
   ./cvmfs-client-setup.sh \
        --stratum-1 bcws.test.aarnet.edu.au \
        --proxy $PROXY \
+       --proxt $PROXY2 \
        pubkeys/containers.biocommons.aarnet.edu.au.pub \
        pubkeys/data.biocommons.aarnet.edu.au.pub \
        pubkeys/tools.biocommons.aarnet.edu.au.pub
 
   ./cvmfs-client-setup.sh \
-       --stratum-1 bcws.test.aarnet.edu.au \
        --proxy $PROXY \
+       --proxt $PROXY2 \
        --stratum-1 cvmfs1-mel0.gvl.org.au \
        --stratum-1 cvmfs1-ufr0.galaxyproject.eu \
        --stratum-1 cvmfs1-tacc0.galaxyproject.org \
