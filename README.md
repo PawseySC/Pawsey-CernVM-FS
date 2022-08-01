@@ -29,12 +29,13 @@ Users will simply access the data sets as though part of their file system, e.g.
     
 Other repositories can be accessed via the following:
 
+    ls /cvmfs/containers.cvmfs.pawsey.org.au
     ls /cvmfs/containers.biocommons.aarnet.edu.au
     ls /cvmfs/data.biocommons.aarnet.edu.au
     ls /cvmfs/tools.bioommons.aarnet.edu.au
     ls /cvmfs/singularity.galaxyproject.org
-    ls  /cvmfs/main.galaxyproject.org
-    ls  /cvmfs/cvmfs-config.galaxyproject.org
+    ls /cvmfs/main.galaxyproject.org
+    ls /cvmfs/cvmfs-config.galaxyproject.org
 
 Once the above path(s) is(are) cached, the user can explore all repositories under /cvmfs. When running analyses, the reference file need only be pointed to the appropriate directory path.
 
