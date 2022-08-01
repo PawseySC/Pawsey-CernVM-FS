@@ -30,6 +30,11 @@ install_all() {
   rm -rf /etc/cvmfs
 
   ./cvmfs-client-setup.sh \
+       --stratum-1 stratum1-cvmfs.pawsey.org.au \
+       --proxy $PROXY \
+       pubkeys/containers.cvmfs.pawsey.org.au.pub
+       
+  ./cvmfs-client-setup.sh \
        --stratum-1 bcws.test.aarnet.edu.au \
        --proxy $PROXY \
        pubkeys/containers.biocommons.aarnet.edu.au.pub \
