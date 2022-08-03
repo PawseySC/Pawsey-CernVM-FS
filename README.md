@@ -18,7 +18,6 @@ Setting up CernVM-FS access on Nimbus instances is simple and quick. It requires
 
     git clone https://github.com/PawseySC/Pawsey-CernVM-FS.git
     cd Pawsey-CernVM-FS
-    sudo chmod u+x install-cvmfs.sh 
     sudo ./install-cvmfs.sh install
 
 If you currently have CVMFS installed for use at Pawsey, you may need to run uninstall before installing again to refresh the repositories:
