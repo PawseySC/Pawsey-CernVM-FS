@@ -2,15 +2,15 @@
 
 ## What is the aim of this document?
 
-This document is designed to provide current users at [Pawsey Supercomputing Centre](https://pawsey.org.au) easy access to a reference dataset repository, through CernVM-FS.
+This document is designed to provide current users at [Pawsey Supercomputing Centre](https://pawsey.org.au) easy access to a containers and reference dataset repositories, through CernVM-FS.
 
 ## What is CernVM-FS and why is it useful?
 
 "The CernVM File System (CernVM-FS) is a read-only file system designed to deliver scientific software onto virtual machines and physical worker nodes in a fast, scalable, and reliable way. Files and file metadata are downloaded on demand and aggressively cached." - [CernVM-FS](https://cvmfs.readthedocs.io/en/stable/cpt-overview.html)
 
-CernVM-FS is a useful solution for ensuring access to commonly used datasets is centralised and easy, and the datasets always updated on the main repository server (Stratum 0), mirrored by replica web servers (Stratum 1), fetched by the proxies (Stratum 2), and accessible to the clients (Stratum 3).
+CernVM-FS is a useful solution for ensuring access to commonly used containers and datasets is centralised and easy, and the files always updated on the main repository server (Stratum 0), mirrored by replica web servers (Stratum 1), fetched by the proxies (Stratum 2), and accessible to the clients (Stratum 3).
 
-At Pawsey Supercomputing Centre, at present, users on the [Nimbus cloud service](https://pawsey.org.au/systems/nimbus-cloud-service/) can access the Galaxy Project's and AARNet's Biocommons CernVM-FS data repositories.
+At Pawsey Supercomputing Centre, at present, users on the [Nimbus cloud service](https://pawsey.org.au/systems/nimbus-cloud-service/) can access the [Galaxy Project](http://datacache.galaxyproject.org)'s and [AARNet's Biocommons RNAseq](https://sydney-informatics-hub.github.io/nfcore-rnaseq/03.6-intro_nimbus_instance/index.html) CernVM-FS repositories.
 
 ## Installation
 
