@@ -41,7 +41,8 @@ install_all() {
        --proxy $PROXY3 \
        pubkeys/containers.biocommons.aarnet.edu.au.pub \
        pubkeys/data.biocommons.aarnet.edu.au.pub \
-       pubkeys/tools.biocommons.aarnet.edu.au.pub
+       pubkeys/tools.biocommons.aarnet.edu.au.pub \
+       pubkeys/unpacked.containers.biocommons.aarnet.edu.au.pub
 
   ./cvmfs-client-setup.sh \
        --proxy $PROXY \
