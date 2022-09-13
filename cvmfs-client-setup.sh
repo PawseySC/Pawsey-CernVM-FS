@@ -2,17 +2,13 @@
 #
 # Create a client host.
 #
-# Note: currently, this script only works when all the repositories
-# are from the same organisation, and uses the same Stratum 0 and
-# Stratum 1 hosts.
-#
 # Note: this is a POSIX "sh" script for maximum portability.
 #
-# Copyright (C) 2021, QCIF Ltd.
+# Copyright (C) 2021, 2022, QCIF Ltd.
 #================================================================
 
 PROGRAM='cvmfs-client-setup'
-VERSION='2.1.0'
+VERSION='3.0.1'
 
 EXE=$(basename "$0" .sh)
 EXE_EXT=$(basename "$0")
@@ -102,6 +98,7 @@ _canonicalise_repo() {
 
 STRATUM_1_HOSTS=
 CVMFS_HTTP_PROXY=
+FIXED_PROXY_ORDER=
 GEO_API=
 CVMFS_QUOTA_LIMIT_MB=$DEFAULT_CACHE_SIZE_MB
 QUIET=
@@ -115,6 +112,10 @@ while [ $# -gt 0 ]
 do
   case "$1" in
     -1|--s1|--stratum1|--stratum-1)
+      if [ -z "$2" ]; then
+        echo "$EXE: usage error: stratum 1 host cannot be an empty string" >&2
+        exit 2
+      fi
       STRATUM_1_HOSTS="$STRATUM_1_HOSTS $2"
       shift; shift
       ;;
@@ -136,6 +137,9 @@ do
       if echo "$2" | grep -q ':'; then
         # Value has a port number
         P="http://$2"
+      elif [ -z "$2" ]; then
+        echo "$EXE: usage error: proxy cannot be an empty string" >&2
+        exit 2
       else
         # Use default port number
         P="http://$2:$DEFAULT_PROXY_PORT"
@@ -144,12 +148,19 @@ do
       if [ -z "$CVMFS_HTTP_PROXY" ]; then
         CVMFS_HTTP_PROXY="$P"
       else
-        CVMFS_HTTP_PROXY="$CVMFS_HTTP_PROXY;$P"
+        CVMFS_HTTP_PROXY="$CVMFS_HTTP_PROXY|$P"
         # Note: ";" separates groups, "|" separates proxies in the same group.
-        # This example setup treats each proxy as belonging to its own group.
+        # The default is to treat each proxy as belonging to the same group.
+        # CernVM-FS will randomly choose a proxy from within a group, and
+        # randomly try the other proxies in the same group until one that
+        # works is found.
       fi
 
       shift; shift
+      ;;
+    --fixed-proxy-order)
+      FIXED_PROXY_ORDER=yes
+      shift
       ;;
     -d|--direct)
       if [ -n "$CVMFS_HTTP_PROXY" ]; then
@@ -196,8 +207,12 @@ do
       exit 2
       ;;
     *)
-      # Argument
+      # Argument: use as repository
 
+      if [ -z "$1" ]; then
+        echo "$EXE: usage error: repository cannot be an empty string" >&2
+        exit 2
+      fi
       REPOS="$REPOS $(_canonicalise_repo "$1")"
 
       shift
@@ -211,6 +226,7 @@ Usage: $EXE_EXT [options] { REPO_FQRN.pub | REPO_FQRN:PUBKEY }
 Options:
   -1 | --stratum-1 HOST     Stratum 1 replica (mandatory; repeat for each)
   -p | --proxy HOST[:PORT]  proxy server and optional port (repeat for each)*
+       --fixed-proxy-order  try proxies in provided order (default: random order)
   -d | --direct             no proxies, connect to Stratum 1 (not recommended)*
   -g | --geo-api            use Geo API (default: do not use Geo API)
   -c | --cache-size NUM     size of cache in MiB (default: $DEFAULT_CACHE_SIZE_MB)
@@ -267,6 +283,15 @@ fi
 if [ "$CVMFS_QUOTA_LIMIT_MB" -lt $MIN_CACHE_SIZE_MB ]; then
   echo "$EXE: usage error: cache is too small: $CVMFS_QUOTA_LIMIT_MB MiB" >&2
   exit 2
+fi
+
+if [ -n "$FIXED_PROXY_ORDER" ]; then
+  # For multiple proxies, change from the default (where they are all in
+  # the same group) to them being in separate groups.
+  #
+  # https://cvmfs.readthedocs.io/en/stable/cpt-configure.html#proxy-lists
+  
+  CVMFS_HTTP_PROXY=$(echo "$CVMFS_HTTP_PROXY" | sed 's/|/;/g')
 fi
 
 #----------------
@@ -334,8 +359,10 @@ fi
 case "$DISTRO" in
   'CentOS Linux release 7.'* \
     | 'CentOS Linux release 8.'* \
-    | 'CentOS Stream release 8.'* \
+    | 'CentOS Stream release 8' \
     | 'Rocky Linux release 8.5 (Green Obsidian)' \
+    | 'Rocky Linux release 8.6 (Green Obsidian)' \
+    | 'Rocky Linux release 9.0 (Blue Onyx)' \
     | 'Ubuntu 21.04' \
     | 'Ubuntu 20.04' \
     | 'Ubuntu 20.10' )
@@ -683,7 +710,11 @@ if [ ! -f "$FILE" ] ; then
 else
   EXISTING_REPOS=$(grep CVMFS_REPOSITORIES /etc/cvmfs/default.local | \
                      sed 's/^CVMFS_REPOSITORIES=\(.*\)/\1/')
-  CVMFS_REPOSITORIES="${EXISTING_REPOS},${NEW_IDS}" # append new repositories
+  if [ -n "$EXISTING_REPOS" ]; then
+    CVMFS_REPOSITORIES="${EXISTING_REPOS},${NEW_IDS}" # append new repositories
+  else
+    CVMFS_REPOSITORIES="$NEW_IDS" # no previously configured repositories
+  fi
 fi
 
 if [ -z "$QUIET" ]; then
@@ -704,15 +735,21 @@ cat > "$FILE" <<EOF
 #
 # Proxies within the same group are separated by a pipe character "|" and
 # groups are separated from each other by a semicolon character ";".
-# A proxy group can consist of only one proxy.
+# When finding a working proxy, all the proxies in a group are randomly
+# tried, before then trying the next group.
+#
+# See <https://cvmfs.readthedocs.io/en/stable/cpt-configure.html#proxy-lists>
+# for details.
 
-CVMFS_HTTP_PROXY='${CVMFS_HTTP_PROXY}'
+CVMFS_HTTP_PROXY="$CVMFS_HTTP_PROXY"
 
 CVMFS_QUOTA_LIMIT=${CVMFS_QUOTA_LIMIT_MB}  # cache size in MiB (recommended: 4GB to 50GB)
 
 $GEO
 
-CVMFS_REPOSITORIES='$CVMFS_REPOSITORIES'
+# Configured repositories
+
+CVMFS_REPOSITORIES=$CVMFS_REPOSITORIES
 EOF
 
 #----------------------------------------------------------------
