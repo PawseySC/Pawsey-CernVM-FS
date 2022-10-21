@@ -29,15 +29,15 @@ If you currently have CVMFS installed for use at Pawsey, you may need to run uni
 
 Users will simply access the data sets as though part of their file system, e.g. accessing the Galaxy project's data repository is as simple as this:
 
-    ls /cvmfs/data.galaxyproject.org
+    ls /cvmfs/singularity.galaxyproject.org
     
 Other repositories can be accessed via the following:
 
-    ls /cvmfs/containers.cvmfs.pawsey.org.au
+    ls /cvmfs/containers.pawsey.org.au
     ls /cvmfs/containers.biocommons.aarnet.edu.au
     ls /cvmfs/data.biocommons.aarnet.edu.au
     ls /cvmfs/tools.bioommons.aarnet.edu.au
-    ls /cvmfs/singularity.galaxyproject.org
+    ls /cvmfs/data.galaxyproject.org
     ls /cvmfs/main.galaxyproject.org
     ls /cvmfs/cvmfs-config.galaxyproject.org
 
