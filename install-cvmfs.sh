@@ -27,6 +27,10 @@ uninstall_all() {
 }
 
 install_all() {
+./cvmfs-client-setup.sh \
+       --stratum-1 146.118.66.45 \
+       --proxy 146.118.64.113 \
+       pubkeys/test.pawsey.org.au.pub
 
   ./cvmfs-client-setup.sh \
        --stratum-1 stratum1-cvmfs.pawsey.org.au \
@@ -43,6 +47,12 @@ install_all() {
        pubkeys/containers.biocommons.aarnet.edu.au.pub \
        pubkeys/data.biocommons.aarnet.edu.au.pub \
        pubkeys/tools.biocommons.aarnet.edu.au.pub \
+
+  ./cvmfs-client-setup.sh \
+       --stratum-1 bcws.test.aarnet.edu.au \
+       --proxy $PROXY \
+       --proxy $PROXY2 \
+       --proxy $PROXY3 \
        pubkeys/unpacked.containers.biocommons.aarnet.edu.au.pub
 
   ./cvmfs-client-setup.sh \
